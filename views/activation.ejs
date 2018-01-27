@@ -1,0 +1,20 @@
+<% layout('/layout/layout') -%>
+<h1> Activate your account </h1>
+<form method="POST" action="/users/activation">
+  <div id="form-group">
+    <label>Activation Key </label>
+    <input class="form-control" name="activation_key" type="text">
+  </div>
+  <br>
+  <input class="btn btn-primary" type="submit" value="Submit">
+</form>
+<br>
+<hr>
+
+<!-- 
+curl -s --user 'api:key-96281c3792fe5cf53927b3b9cbcd9240' \
+    https://api.mailgun.net/v3/sandboxce0e92c0e86e4134b3dac4eb2003c7e9.mailgun.org/messages \
+        -F from='Mailgun Sandbox <postmaster@sandboxce0e92c0e86e4134b3dac4eb2003c7e9.mailgun.org>' \
+        -F to='Bhavesh <bhavesh.badjatya@gmail.com>' \
+        -F subject='Hello Bhavesh' \
+        -F text='Congratulations Bhavesh, you just sent an email with Mailgun!  You are truly awesome!' -->
