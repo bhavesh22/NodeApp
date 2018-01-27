@@ -1,0 +1,16 @@
+<% layout('/layout/layout') -%>
+<h1>Add Note</h1>
+<form method="POST" action="/notes/add">
+  <div id="form-group">
+    <label>Title:</label>
+      <input class="form-control" name="title" type="text">
+  </div>
+  <div id="form-group">
+    <label>Body:</label>
+    <textarea class="form-control" name="body"></textarea>
+  </div>
+  <br>
+  <input class="btn btn-primary" type="submit" value="Submit">
+</form>
+<br>
+<hr>

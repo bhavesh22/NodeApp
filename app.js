@@ -65,13 +65,23 @@ app.post('*', function(req, res, next){
   next();
 });
 
-
-app.get('/', function(req, res){
-	res.render('index');
-});
-
 let users = require('./routes/users');
 app.use('/users', users);
 app.listen(3012, function(){
   console.log('Server started !');
 });
+let Note = require('./models/note');
+app.get('/', function(req, res){
+  Note.find({}, function(err, notes){
+    if(err){
+      console.log(err);
+    } else {
+      res.render('index', {
+        title:'Notes',
+        notes: notes
+      });
+    }
+  });
+});
+let notes = require('./routes/notes');
+app.use('/notes', notes);

@@ -1,2 +1,10 @@
 <% layout('/layout/layout') -%>
-index
+<h1><%= title %></h1>
+	<ul class="list-group">
+		<% notes.forEach(function(note){ %>
+			<li class="list-group-item">
+				<a href="/notes/<%= note._id %>" ><%= note.title%></a>
+			</li>
+		<% })%>
+	</ul>
+</h1>
