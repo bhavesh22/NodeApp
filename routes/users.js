@@ -57,7 +57,7 @@ router.post('/register', function(req, res){
             console.log(err);
             return;
           } else {
-            const html = "Hi there, <br/> Thank you for registering! <br/><br/> Please verify your email by typing the following token:<br/>Token: <b>"+ activation_key+ "</b><br/>On the following page:<a href='http://localhost:3012/users/activation'>http://localhost:3012/users/activation</a><br/><br/>Have a pleasant day." 
+            const html = "Hi there, <br/> Thank you for registering! <br/><br/> Please verify your email by typing the following token:<br/>Token: <b>"+ activation_key+ "</b><br/>On the following page:<a href='http://139.59.83.115:3000/users/activation'>http://139.59.83.115:3000/users/activation</a><br/><br/>Have a pleasant day." 
             mailer.sendEmail('admin@codeworkrsite.com', email, 'Please verify your email!', html);
             req.flash('success', 'Please check your email for account verfication');
             res.redirect('/users/login');

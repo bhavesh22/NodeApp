@@ -94,6 +94,7 @@ app.get('/', function(req, res){
 let notes = require('./routes/notes');
 app.use('/notes', notes);
 
-app.listen(3012, function(){
-  console.log('Server started !');
+const Port = require('./config/port')
+app.listen(Port, function(){
+  console.log('Server started on ' + Port);
 });
