@@ -7,13 +7,14 @@ const flash = require('connect-flash');
 const session = require('express-session');
 const passport = require('passport');
 const config = require('./config/database');
-mongoose.connect(config.database);
 const app = express();
+
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.engine('ejs', require('ejs-locals'));
 app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json
+mongoose.connect(config.database);
 app.use(bodyParser.json());
 
 // Set Public Folder
@@ -67,9 +68,7 @@ app.post('*', function(req, res, next){
 
 let users = require('./routes/users');
 app.use('/users', users);
-app.listen(3012, function(){
-  console.log('Server started !');
-});
+
 let Note = require('./models/note');
 app.get('/', function(req, res){
   if(req.user) {
@@ -87,10 +86,14 @@ app.get('/', function(req, res){
   } else {
     res.render('index', {
       title:'Notes',
-      notes: []
+      notes: ""
     });
   }
   
 });
 let notes = require('./routes/notes');
 app.use('/notes', notes);
+
+app.listen(3012, function(){
+  console.log('Server started !');
+});

@@ -199,3 +199,11 @@ input[type="submit"]:active {
   font-size: 20px;
   color: black;
 }
+
+.index_login_text {
+  font-style: italic;
+  font-family: Georgia, Times, serif;
+  font-size: 20px;
+  color: black;
+  margin-top: 25px;
+}

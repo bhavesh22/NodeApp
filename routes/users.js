@@ -16,14 +16,14 @@ router.get('/register', function(req, res){
 router.post('/register', function(req, res){
   const name = req.body.name;
   const email = req.body.email;
-  const username = req.body.username;
+  const phone_number = req.body.phone_number;
   const password = req.body.password;
   const password2 = req.body.password2;
 
   req.checkBody('name', 'Name is required').notEmpty();
   req.checkBody('email', 'Email is required').notEmpty();
   req.checkBody('email', 'Email is not valid').isEmail();
-  req.checkBody('username', 'Username is required').notEmpty();
+  req.checkBody('phone_number', 'Phone Number is required').notEmpty();
   req.checkBody('password', 'Password is required').notEmpty();
   req.checkBody('password2', 'Passwords do not match').equals(req.body.password);
 
@@ -39,7 +39,7 @@ router.post('/register', function(req, res){
     let newUser = new User({
       name:name,
       email:email,
-      username:username,
+      phone_number:phone_number,
       password:password,
       active: false
     });
@@ -57,7 +57,6 @@ router.post('/register', function(req, res){
             console.log(err);
             return;
           } else {
-            // req.flash('success','You are now registered and can log in');
             const html = "Hi there, <br/> Thank you for registering! <br/><br/> Please verify your email by typing the following token:<br/>Token: <b>"+ activation_key+ "</b><br/>On the following page:<a href='http://localhost:3012/users/activation'>http://localhost:3012/users/activation</a><br/><br/>Have a pleasant day." 
             mailer.sendEmail('admin@codeworkrsite.com', email, 'Please verify your email!', html);
             req.flash('success', 'Please check your email for account verfication');

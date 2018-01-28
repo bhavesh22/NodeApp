@@ -61,22 +61,41 @@ router.get('/edit/:id', ensureAuthenticated, function(req, res){
 
 // Update Submit POST Route
 router.post('/edit/:id', function(req, res){
-  let note = {};
-  note.title = req.body.title;
-  note.author = req.body.author;
-  note.body = req.body.body;
 
-  let query = {_id:req.params.id}
+  req.checkBody('title','Title is required').notEmpty();
+  req.checkBody('author','Author is required').notEmpty();
+  req.checkBody('body','Body is required').notEmpty();
+  console.log(req.params.id);
+  
+  let errors = req.validationErrors();
+  if(errors){
+    note = Note.findById(req.params.id, function(err, note){
+      console.log(note.title);
+      // req.flash('danger',errors)
+      // res.redirect('/notes/edit/'+ req.params.id);
+      res.render('edit_note', {
+       errors: errors,
+        note: note
+      });
+    });
+  } else {
+    let note = {};
+    note.title = req.body.title;
+    note.author = req.body.author;
+    note.body = req.body.body;
 
-  Note.update(query, note, function(err){
-    if(err){
-      console.log(err);
-      return;
-    } else {
-      req.flash('success', 'Note Updated');
-      res.redirect('/');
-    }
-  });
+    let query = {_id:req.params.id}
+
+    Note.update(query, note, function(err){
+      if(err){
+        console.log(err);
+        return;
+      } else {
+        req.flash('success', 'Note Updated');
+        res.redirect('/');
+      }
+    });
+  }
 });
 
 // Delete Article

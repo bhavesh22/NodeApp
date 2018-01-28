@@ -39,7 +39,7 @@ module.exports = function(passport){
   });
 }
 
-// notes
+// Notes for self learning
 // 1- Passport recognizes that each application has unique authentication requirements.  
 // 2- Authentication mechanisms, known as strategies, are packaged as individual modules. 
 // 3- Applications can choose which strategies to employ, without creating unnecessary dependencies.
