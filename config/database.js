@@ -1,4 +1,4 @@
 module.exports = {
-  database:'mongodb://localhost:27017/nodekb2',
+  database:'mongodb://localhost:27017/zerogames',
   secret: 'yoursecret'
 }

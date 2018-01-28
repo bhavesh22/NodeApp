@@ -1,20 +1,4 @@
 <% layout('/layout/layout') -%>
-<link href="/css/login.css" rel="stylesheet">
-<div class="login edit_note">
-	<form method="POST" action="/notes/edit/<%= note._id%>" class="edit_form">
-		<div><label>Title:</label></div>
-	  <input name="title" type="text" value=<%= note.title %>>
-	  <div><label>Author:</label></div>
-		<input name="author" type="text" value=<%= note.author %>>
-		<div><label>Body:</label></div>
-		<textarea name="body"><%= note.body %></textarea>
-	  <input type="submit" value="Update">	
-	</form>
-</div>
-<div class="shadow"></div>
-
-
-<!-- <% layout('/layout/layout') -%>
 <h1><%= title %></h1>
 <form method="POST" action="/notes/edit/<%= note._id%>" >
 	<div id="form-group">
@@ -33,4 +17,4 @@
 	<input class="btn btn-primary" type="submit" value="Submit">
 </form>
 <br>
-<hr> -->
+<hr>

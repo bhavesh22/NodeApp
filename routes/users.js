@@ -50,17 +50,17 @@ router.post('/register', function(req, res){
           console.log(err);
         }
         newUser.password = hash;
-        var activation_key  = randomstring.generate()
+        var activation_key  = randomstring.generate(8)
         newUser.activation_key = activation_key;
         newUser.save(function(err){
           if(err){
             console.log(err);
             return;
           } else {
-            req.flash('success','You are now registered and can log in');
+            // req.flash('success','You are now registered and can log in');
             const html = "Hi there, <br/> Thank you for registering! <br/><br/> Please verify your email by typing the following token:<br/>Token: <b>"+ activation_key+ "</b><br/>On the following page:<a href='http://localhost:3012/users/activation'>http://localhost:3012/users/activation</a><br/><br/>Have a pleasant day." 
             mailer.sendEmail('admin@codeworkrsite.com', email, 'Please verify your email!', html);
-            req.flash('success', 'Please check your email.');
+            req.flash('success', 'Please check your email for account verfication');
             res.redirect('/users/login');
           }
         });
@@ -72,6 +72,10 @@ router.post('/register', function(req, res){
 // Login Form
 router.get('/login', function(req, res){
   res.render('login');
+});
+
+router.get('/login2', function(req, res){
+  res.render('login2');
 });
 
 // Login Process
@@ -95,15 +99,23 @@ router.get('/activation',function(req, res){
 });
 
 router.post('/activation',function(req, res){
+  email = req.body.email;
   activation_key = req.body.activation_key;
-  let query = {activation_key: activation_key};
+  let query = {email: email};
   User.findOne(query, function(err, user){
     if (!user) {
       req.flash('error', 'No user found.');
       res.redirect('/users/activation');
       return;
     }
-    user.active = true;
+    if(user.activation_key == activation_key){
+      user.active = true;
+      user.save();
+      req.flash('success', 'Congrats !! Your email is activated');
+    }
+    else {
+      req.flash('error', 'Activation key did not matched');
+    }
     res.redirect('/users/login');
   });
 });

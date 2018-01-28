@@ -72,16 +72,25 @@ app.listen(3012, function(){
 });
 let Note = require('./models/note');
 app.get('/', function(req, res){
-  Note.find({}, function(err, notes){
-    if(err){
-      console.log(err);
-    } else {
-      res.render('index', {
-        title:'Notes',
-        notes: notes
-      });
-    }
-  });
+  if(req.user) {
+    Note.find({author: req.user._id}, function(err, notes){
+      if(err){
+        console.log(err);
+      } 
+      else {
+        res.render('index', {
+          title:'Notes',
+          notes: notes
+        });
+      }
+    });
+  } else {
+    res.render('index', {
+      title:'Notes',
+      notes: []
+    });
+  }
+  
 });
 let notes = require('./routes/notes');
 app.use('/notes', notes);

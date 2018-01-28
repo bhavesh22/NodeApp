@@ -13,9 +13,9 @@ module.exports = function(passport){
       if(!user){
         return done(null, false, {message: 'No user found'});
       }
-      // if(!user.active){
-      //   return done(null, false, {message: 'User not activated'});
-      // }
+      if(!user.active){
+        return done(null, false, {message: 'User not activated'});
+      }
       // Match Password
       bcrypt.compare(password, user.password, function(err, isMatch){
         if(err) throw err;

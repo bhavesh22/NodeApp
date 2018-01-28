@@ -1,18 +1,15 @@
 <% layout('/layout/layout3') -%>
-<link href="/css/list.css" rel="stylesheet">
 <h1><%= title %></h1>
-<div class="list2">
-	<ol>
+	<ul class="list-group">
 		<% notes.forEach(function(note){ %>
-			<li>
-				<p><a href="/notes/<%= note._id %>" ><%= note.title%></a></p>
-				<p><%= note.body%></p>
+			<li class="list-group-item">
+				<a href="/notes/<%= note._id %>" ><%= note.title%></a>
 			</li>
 		<% })%>
-	</ol>
-</div>
+	</ul>
+</h1>
 
-<!-- 
+
 <div id="list2">
    <ol>
       <li><p><em>The Netherlands</em> is a country in ...</p></li>
@@ -20,4 +17,4 @@
       <li><p><em>The Philippines</em> officially known as the Republic ...</p></li>
       <li><p><em>The United Kingdom</em> of Great Britain and ...</p></li>
    </ol>
-</div> -->
+</div>

@@ -1,9 +1,10 @@
 <% layout('/layout/layout') -%>
 <link href="/css/login.css" rel="stylesheet">
 <div class="login">
-    <input type="text" placeholder="Username" id="username">  
-  <input type="password" placeholder="password" id="password">  
-  <a href="#" class="forgot">forgot password?</a>
-  <input type="submit" value="Sign In">
+	<form method="POST" action="/users/login">
+	  <input type="text" placeholder="Username" id="username" name="username">  
+	  <input type="password" placeholder="password" id="password" name="password">  
+	  <input type="submit" value="Sign In">	
+	</form>
 </div>
 <div class="shadow"></div>

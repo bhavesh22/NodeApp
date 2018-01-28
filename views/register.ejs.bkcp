@@ -1,18 +1,4 @@
 <% layout('/layout/layout') -%>
-<link href="/css/login.css" rel="stylesheet">
-<div class="login register">
-  <form method="POST" action="/users/register">
-    <input type="text" placeholder="Username" id="username" name="name">
-    <input type="text" placeholder="Email" id="username" name="email">  
-    <input type="text" placeholder="Name" id="username" name="username">  
-    <input type="password" placeholder="password" id="password" name="password">
-    <input type="password" placeholder="confirm" id="password2" name="password2">    
-    <input type="submit" value="Register"> 
-  </form>
-</div>
-<div class="shadow"></div>
-<!-- 
-<% layout('/layout/layout') -%>
 <h1>Register</h1>
 <form method="POST" action="/users/register">
   <div id="form-group">
@@ -40,4 +26,3 @@
 </form>
 <br>
 <hr>
- -->
