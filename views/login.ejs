@@ -1,16 +1,9 @@
 <% layout('/layout/layout') -%>
-<h1>Login</h1>
-<form method="POST" action="/users/login">
-  <div id="form-group">
-    <label>Username:</label>
-    <input class="form-control" name="username" type="text">
-  </div>
-  <div id="form-group">
-    <label>Password:</label>
-    <input class="form-control" name="password" type="password">
-  </div>
-  <br>
-  <input class="btn btn-primary" type="submit" value="Submit">
-</form>
-<br>
-<hr>
+<link href="/css/login.css" rel="stylesheet">
+<div class="login">
+    <input type="text" placeholder="Username" id="username">  
+  <input type="password" placeholder="password" id="password">  
+  <a href="#" class="forgot">forgot password?</a>
+  <input type="submit" value="Sign In">
+</div>
+<div class="shadow"></div>
