@@ -1,29 +1,13 @@
 <% layout('/layout/layout') -%>
-<link href="/css/list.css" rel="stylesheet">
-
 <div class="note">
-		<p>Title : <%= note.title %></p>
-		<p> Written by: <%= author%></p>
-		<p>Body : <%= note.body %></p>
-		<hr>
-		<% if(user){ %>
-		  <% if(user.id ==note.author) { %>
-		    <a class="btn btn-default" href='/notes/edit/<%=note._id%>' >Edit </a>
-				<a class="btn btn-danger delete-note" href='#' data-id="<%= note._id %>" > Delete </a>
-		  <% } %>
-		<% } %>
-<!-- 	<ul>
-		<li><%= note.title %></li>
-		<li> Written by <%= author%></li>
-		<li><%= note.body %></li>
-		<hr>
-		<% if(user){ %>
-		  <% if(user.id ==note.author) { %>
-		    <a class="btn btn-default" href='/notes/edit/<%=note._id%>' >Edit </a>
-				<a class="btn btn-danger delete-note" href='#' data-id="<%= note._id %>" > Delete </a>
-		  <% } %>
-		<% } %>
-</ul> -->
+	<p>Title : <%= note.title %></p>
+	<p> Written by: <%= author%></p>
+	<p>Body : <%= note.body %></p>
+	<hr>
+	<% if(user){ %>
+	  <% if(user.id ==note.author) { %>
+	    <a class="btn btn-default" href='/notes/edit/<%=note._id%>' >Edit </a>
+			<a class="btn btn-danger delete-note" href='#' data-id="<%= note._id %>" > Delete </a>
+	  <% } %>
+	<% } %>
 </div>
-
-<!--  -->
