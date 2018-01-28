@@ -73,9 +73,6 @@ router.get('/login', function(req, res){
   res.render('login');
 });
 
-router.get('/login2', function(req, res){
-  res.render('login2');
-});
 
 // Login Process
 router.post('/login', function(req, res, next){
