@@ -14,4 +14,7 @@ $(document).ready(function(){
       }
     });
   });
+  if($('#activation_email').val() != "" && $('#activation_token').val() != "") {
+    $("#email_activation_button").trigger('click');
+  }
 });

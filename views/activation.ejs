@@ -1,9 +1,9 @@
 <% layout('/layout/layout') -%>
 <div class="login">
 	<form method="POST" action="/users/activation">
-	  <input type="text" placeholder="Email Id" id="email" name="email">  
-	  <input type="text" placeholder="Activation Key" id="activation_key" name="activation_key">  
-	  <input type="submit" value="Verify">	
+	  <input type="text" placeholder="Email Id" id="activation_email" name="email" value=<%= email%>>  
+	  <input type="text" placeholder="Activation Key" id="activation_token" name="activation_key" value=<%= token%>>  
+	  <input type="submit" value="Verify" id="email_activation_button">	
 	</form>
 </div>
 <div class="shadow"></div>
