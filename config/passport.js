@@ -30,13 +30,11 @@ module.exports = function(passport){
   }));
 
   passport.serializeUser(function(user, d) {
-    console.log("2-inside serializeUser");
     d(null, user.id);
   });
 
   passport.deserializeUser(function(id, d) {
     User.findById(id, function(err, user) {
-      console.log("3-Inside deserializeUser")
       d(err, user);
     });
   });

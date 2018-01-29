@@ -10,10 +10,6 @@ const UserSchema = mongoose.Schema({
     type: String,
     required: true
   },
-  // username:{
-  //   type: String,
-  //   required: true
-  // },
   phone_number:{
     type: Number,
     required: true
@@ -30,16 +26,7 @@ const UserSchema = mongoose.Schema({
   }
 });
 
-
-
-UserSchema.statics.search_by_email = function search_by_email(email) {
-  console.log("static method 2");
-  return User.findOne({email: email}, function(err, user){
-    console.log(user)
-    return user;
-  });
-};
-
+//Static method
 UserSchema.statics.user_count = function user_count() {
   User.count(function(err, count){
     console.log(count);
@@ -47,27 +34,10 @@ UserSchema.statics.user_count = function user_count() {
   return 
 };
 
-
+//Instance method
 UserSchema.methods.get_user_name = function get_user_name() {
  console.log(this.name);
   return 
 };
 
-const User =  mongoose.model('User', UserSchema);
-
-
-// User.methods.get_name = function(email, cb) {
-//   return this.model('User').where('email', email).name.exec(cb);
-// }
-
-
-// AnimalSchema.methods.findSimilarType = function findSimilarType (cb) {
-//   return this.model('Animal').find({ type: this.type }, cb);
-// };
-
-// AnimalSchema.statics.search = function search (name, cb) {
-//   return this.where('name', new RegExp(name, 'i')).exec(cb);
-// }
-
-
-module.exports = User
+module.exports = mongoose.model('User', UserSchema);

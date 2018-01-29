@@ -19,7 +19,6 @@ router.post('/register', function(req, res){
   const phone_number = req.body.phone_number;
   const password = req.body.password;
   const password2 = req.body.password2;
-
   req.checkBody('name', 'Name is required').notEmpty();
   req.checkBody('email', 'Email is required').notEmpty();
   req.checkBody('email', 'Email is not valid').isEmail();
@@ -27,15 +26,8 @@ router.post('/register', function(req, res){
   req.checkBody('password', 'Password is required').notEmpty();
   req.checkBody('password2', 'Passwords do not match').equals(req.body.password);
   req.checkBody('email').EmailAlreadyExists(req.params.id).withMessage('Email id already exists');
-
-  // req.custom((value, { req }) => value === req.body.password)
   let errors = req.validationErrors();
-
-
  
-// Within your route handler
-
-
 
   if(errors){
     console.log(errors);
@@ -126,7 +118,7 @@ router.post('/activation',function(req, res){
 module.exports = router;
 
 
-// notes
+// notes(learning)
 // 1- A salt is random text added to the string to be hashed. For example, you don't hash my_secret_password; you hash something like 1jfSLKe$*@SL$#)(Sslkfs$34:my_secret_password
 // 2- The salt is being stored as part of the hash.
 // 3- With "salt round" they actually mean the cost factor. The cost factor controls how much time is needed to calculate a single BCrypt hash. The higher the cost factor, the more hashing rounds are done. Increasing te cost factor by 1 doubles the necessary time. The more time is necessary, the more difficult is brute-forcing.
