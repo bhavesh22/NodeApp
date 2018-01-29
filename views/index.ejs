@@ -1,18 +1,24 @@
 <% layout('/layout/layout') -%>
 <% if (notes) { %>
-	<h1><%= title %></h1>
-	<div class="list2">
-		<ol>
-			<% notes.forEach(function(note){ %>
-				<li>
-					<p><a href="/notes/<%= note._id %>" ><%= note.title%></a></p>
-					<p><%= note.body%></p>
-				</li>
-			<% })%>
-		</ol>
-	</div>
+	<% if(notes.length > 0) { %> 
+		<h1><%= title %></h1>
+		<div class="list2">
+			<ol>
+				<% notes.forEach(function(note){ %>
+					<li>
+						<p><a href="/notes/<%= note._id %>" ><%= note.title%></a></p>
+						<p><%= note.body%></p>
+					</li>
+				<% })%>
+			</ol>
+		</div>
+	<%} else { %>
+		<div class="index_login_text">
+	 		 <a href="notes/add">Add notes </a>
+		</div>
+	<% } %>
 <% } else {%>
 <div class="index_login_text">
-	 Please login to see your notes 
+	 Please <a href="users/login">login</a> to see your notes 
 </div>
 <% } %>
