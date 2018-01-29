@@ -1,25 +1,16 @@
-const nodemailer = require('nodemailer');
+const sgMail = require('@sendgrid/mail');
 const config = require('../config/mailer');
-
-const transport = nodemailer.createTransport({
-  service: 'Mailgun',
-  auth: {
-    user: config.MAILGUN_USER,
-    pass: config.MAILGUN_PASS
-  },
-  tls: {
-    rejectUnauthorized: false
-  }
-});
-
+sgMail.setApiKey(config.SentGridAPIKey);
 module.exports = {
   sendEmail(from, to, subject, html) {
-    return new Promise((resolve, reject) => {
-      transport.sendMail({ from, subject, to, html }, (err, info) => {
-        // if (err) reject(err);
-        if (err) console.log(err);
-        resolve(info);
-      });
-    });
+    const msg = {
+      to: to,
+      from: 'test@example.com',
+      subject: subject,
+      text: 'Registration mail',
+      html: html,
+    };
+    sgMail.send(msg);
   }
 }
+

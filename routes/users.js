@@ -26,8 +26,16 @@ router.post('/register', function(req, res){
   req.checkBody('phone_number', 'Phone Number is required').notEmpty();
   req.checkBody('password', 'Password is required').notEmpty();
   req.checkBody('password2', 'Passwords do not match').equals(req.body.password);
+  req.checkBody('email').EmailAlreadyExists(req.params.id).withMessage('Email id already exists');
 
+  // req.custom((value, { req }) => value === req.body.password)
   let errors = req.validationErrors();
+
+
+ 
+// Within your route handler
+
+
 
   if(errors){
     console.log(errors);
@@ -124,3 +132,5 @@ module.exports = router;
 // 3- With "salt round" they actually mean the cost factor. The cost factor controls how much time is needed to calculate a single BCrypt hash. The higher the cost factor, the more hashing rounds are done. Increasing te cost factor by 1 doubles the necessary time. The more time is necessary, the more difficult is brute-forcing.
 // 4- The salt is a random value, and should differ for each calculation, so the result should hardly ever be the same, even for equal passwords.
 // 5- The salt is usually included in the resulting hash-string in readable form. So with storing the hash-string you also store the salt.
+
+

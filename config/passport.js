@@ -20,6 +20,7 @@ module.exports = function(passport){
       bcrypt.compare(password, user.password, function(err, isMatch){
         if(err) throw err;
         if(isMatch){
+          console.log("1-user is passed")
           return done(null, user);
         } else {
           return done(null, false, {message: 'Wrong password'});
@@ -28,13 +29,15 @@ module.exports = function(passport){
     });
   }));
 
-  passport.serializeUser(function(user, done) {
-    done(null, user.id);
+  passport.serializeUser(function(user, d) {
+    console.log("2-inside serializeUser");
+    d(null, user.id);
   });
 
-  passport.deserializeUser(function(id, done) {
+  passport.deserializeUser(function(id, d) {
     User.findById(id, function(err, user) {
-      done(err, user);
+      console.log("3-Inside deserializeUser")
+      d(err, user);
     });
   });
 }

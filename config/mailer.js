@@ -1,4 +1,3 @@
 module.exports = {
-  MAILGUN_USER: 'postmaster@www.bhaveshbadjatya.com',
-  MAILGUN_PASS: '1cc84113f6aaa5361fc118103d73b874'
+  SentGridAPIKey: "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"
 };

@@ -50,6 +50,15 @@ app.use(expressValidator({
   }
 }));
 
+ app.use(expressValidator({
+  customValidators: {
+    EmailAlreadyExists (email) {
+      return false;
+    }
+  }
+}));
+
+
 // Passport Config
 require('./config/passport')(passport);
 // Passport Middleware
@@ -72,6 +81,7 @@ app.use('/users', users);
 let Note = require('./models/note');
 app.get('/', function(req, res){
   if(req.user) {
+    req.user.get_user_name();
     Note.find({author: req.user._id}, function(err, notes){
       if(err){
         console.log(err);
@@ -98,3 +108,25 @@ const Port = require('./config/port')
 app.listen(Port, function(){
   console.log('Server started on ' + Port);
 });
+
+const User = require('./models/user');
+console.log("static method")
+// User.search_by_email('bhavesh.badjaty@gmail.com',function(err,user){
+//   if(err) {
+//     console.log("error inside static method");
+//     return 
+//   };
+//   console.log("User junta")
+
+//   console.log(user)
+//     console.log(err)
+
+//   console.log("inside static method");
+//   console.log(user[0]._id);
+// });
+// bool_user = User.search_by_email('bhavesh.badjaty@gmail.com');
+
+// console.log("bool user ke value");
+// console.log(bool_user);
+User.user_count();
+// req.user.get_user_name();
