@@ -32,38 +32,48 @@ router.post('/register', function(req, res){
       errors: errors
     });
     return;
-  } else {
-    let newUser = new User({
-      name:name,
-      email:email,
-      phone_number:phone_number,
-      password:password,
-      active: false
-    });
-
-    bcrypt.genSalt(10, function(err, salt){
-      bcrypt.hash(newUser.password, salt, function(err, hash){
-        if(err){
-          console.log(err);
-        }
-        newUser.password = hash;
-        var activation_key  = randomstring.generate(8)
-        newUser.activation_key = activation_key;
-        newUser.save(function(err){
-          if(err){
-            console.log(err);
-            return;
-          } else {
-            const html = "Hi there, <br/> Thank you for registering! <br/><br/> Please verify your email by typing the following token:<br/>Token: <b>"+ activation_key+ "</b><br/>On the following page:<a href='http://139.59.83.115:3000/users/activation'>http://139.59.83.115:3000/users/activation</a><br/><br/>Have a pleasant day." 
-            mailer.sendEmail('admin@codeworkrsite.com', email, 'Please verify your email!', html);
-            req.flash('success', 'Please check your email for account verfication');
-            res.redirect('/users/login');
-          }
+  } 
+  else {
+    User.findOne({ 'email': email }, function(err, user) {
+      if (user) {
+        req.flash('danger', 'That email is already taken.')
+        res.render('register');
+      }
+      else {
+        let newUser = new User({
+          name:name,
+          email:email,
+          phone_number:phone_number,
+          password:password,
+          active: false
         });
-      });
+
+        bcrypt.genSalt(10, function(err, salt){
+          bcrypt.hash(newUser.password, salt, function(err, hash){
+            if(err){
+              console.log(err);
+            }
+            newUser.password = hash;
+            var activation_key  = randomstring.generate(8)
+            newUser.activation_key = activation_key;
+            newUser.save(function(err){
+              if(err){
+                console.log(err);
+                return;
+              } else {
+                const html = "Hi there, <br/> Thank you for registering! <br/>Please verify your email on the page: <a href='http://139.59.83.115:3000/users/activation'>http://139.59.83.115:3000/users/activation</a> by the following token:<br/>Token: <b>"+ activation_key+ "<br> Have a pleasant day." 
+                mailer.sendEmail('admin@codeworkrsite.com', email, 'Please verify your email!', html);
+                req.flash('success', 'Please check your email for account verfication');
+                res.redirect('/users/login');
+              }
+            });
+          });
+        });
+      }
     });
   }
 });
+
 
 // Login Form
 router.get('/login', function(req, res){
