@@ -1,0 +1,23 @@
+1. Create a simple Login/Registration web app (feel free to use any available opensource templates for front end) using nodejs and mongodb.
+
+-> Relevant code 
+-> models/user , routes/users , config/passport, 
+
+2. In the above, create atleast one mongoose model showcasing implementation of instance and static methods in it.
+
+--> Relevant code -> 
+--> models/user line- 29-41 , static and instance methods are defined . 
+--> This are called on app.js line number 76 req.user.get_user_name() and line number 106  User.user_count()
+
+3. Create and implement your own version of email activation and verification system with a brief write up (less than 500 words) on it explaining how your activation/verification system works.
+
+--> The file email_activation contains the description of the implementation.
+
+4. Showcase a CRUD module for managing records in the mongodb database in the dashboard page which loads after user is logged in into your node app.
+
+-> Relevant code 
+-> models/note, routes/notes 
+This operations on the Note model is only available when the user in logged in.
+
+This video explains the flow of application
+and https://www.youtube.com/watch?v=TChVf6drciQ&feature=youtu.be 

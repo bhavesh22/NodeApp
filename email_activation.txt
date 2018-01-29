@@ -1,0 +1,22 @@
+In Brief
+1-Generating a secret token 
+2-Associating generated secret token with the user account and saving in database
+3-Intialize the user active feild to false
+4-Send email to the emailid of the user
+5-When the user correctly submits secret token, user active feild is set to true
+
+StepWise
+1- Secret token is generated through randomstring package which is a library to create random strings. 
+2- Syntax is randomstring.generate(n) with n representing the length of the string 
+UserSchema contains fields - activation_key(String), active(Boolean)
+3- When the Post request for user registration is handled, activation_key is mapped to secret token and the active value to false
+4- When the user log in with a email that has not been activated , then a error message is displayed.
+Then a email is triggered to the user,  with the content
+Hi there, 
+Thank you for registering! 
+Please verify your email by typing the following token:
+Token: RQ4MvZ9mFTyx84WHPTEV88oSWZLVTomU
+http://139.59.83.115:3000/users/activation
+5 - Email is triggered using the package @sendgrid/mail
+6- http://139.59.83.115:3000/users/activation - This link redirects the user to the activation page, where activation code has to be submitted
+7-  If the activation_key received through the post request  matches with the activation_key of the user with the given email id then the active status is turned to True. This completes the email activation process.
